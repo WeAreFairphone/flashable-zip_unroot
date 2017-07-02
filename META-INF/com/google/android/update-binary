@@ -1,0 +1,39 @@
+#!/sbin/sh
+
+# Copyright 2013 Koushik Dutta, 2014 Ron Rieve
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# arg 1 is recovery api version, generally 3.
+# arg 2 is the pipe fd, to the recovery binary.
+# communicate with it using the recovery api.
+# arg 3 is the zip file
+
+echo -n -e 'ui_print Getting ready...\n' > /proc/self/fd/$2
+
+SU_PATHS='/system/bin/su /system/xbin/su'
+ADDOND_PATHS='/system/addon.d/51-addonsu.sh' # OTA survival script from LineageOS
+INITRC_PATHS='/system/etc/init/superuser.rc'
+
+mount /system
+
+
+echo -n -e "ui_print Deleting root files...\n" > /proc/self/fd/$2
+
+rm -rf $SU_PATHS $ADDOND_PATHS $INITRC_PATHS
+
+
+echo -n -e 'ui_print Done\n' > /proc/self/fd/$2
+echo -n -e 'ui_print\n' > /proc/self/fd/$2
+
+umount /system
