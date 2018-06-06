@@ -9,12 +9,19 @@ Unrooting is needed to pass SafetyNet requirements for some apps. [Guide](https:
 Build
 ===
 
-Run the `build-zip.sh` shell script:
+Run:
 ```
-source build-zip.sh
+make build
 ```
 
-This will generate a `unroot_YYYY-MM-DD.zip` file.
+This will generate a `emojione.zip` in the `build/` folder.
+
+To make a public release, run:
+```
+make release
+```
+
+This will generate a `unroot_YYYY-MM-DD.zip` file in the `release/` folder.
 
 
 Install
