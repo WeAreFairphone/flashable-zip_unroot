@@ -12,7 +12,7 @@ RELEASENAME  := "unroot_%Y-%m-%d.zip"
 all: build
 
 build: $(FLASHABLEZIP)
-$(FLASHABLEZIP): $(SOURCEFILES) $(EMOJIONE_FONT)
+$(FLASHABLEZIP): $(SOURCEFILES)
 	@echo "Building flashable ZIP..."
 	@mkdir -pv `dirname $(FLASHABLEZIP)`
 	@rm -f "$(FLASHABLEZIP)"
@@ -24,7 +24,6 @@ $(FLASHABLEZIP): $(SOURCEFILES) $(EMOJIONE_FONT)
 
 clean:
 	@echo Removing built files...
-	rm -f "$(EMOJIONE_DEST)"
 	rm -f "$(FLASHABLEZIP)"
 	@# only remove dir if it's empty:
 	@rmdir -p `dirname $(FLASHABLEZIP)` 2>/dev/null || true
